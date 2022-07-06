@@ -1,0 +1,48 @@
+p {
+  color: blue;
+  font-weight: bold;
+}
+
+.weather {
+  color: coral;
+  font-size: 24px;
+}
+
+.sun-icon {
+  color: darkorange;
+  font-size: 24px;
+}
+
+.city-card {
+  border: 1px solid white;
+  border-right: 5px solid coral;
+}
+
+.weather {
+  border: none;
+}
+
+.position-relative {
+  top: 60px;
+}
+
+.key {
+  color: black;
+}
+
+.city {
+  font-size: 34px;
+}
+
+.temp {
+  font-size: 10px;
+}
+
+#current {
+  background: green;
+  padding: 5px 25px;
+}
+
+#search {
+  padding: 5px 25px;
+}
