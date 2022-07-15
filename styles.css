@@ -58,3 +58,7 @@ p {
 .active:hover {
   text-decoration: underline;
 }
+
+#Git {
+  color: black;
+}
