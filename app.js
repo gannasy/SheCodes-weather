@@ -8,22 +8,35 @@ let city = document.querySelector(".city");
 let api = "ef83a86d6c6e19e2b4352f1ab9249fd9";
 let dateTime = document.getElementById("date-time");
 let days = ["Sunday", "Monday", "Tuesday", "Wensday", "Thurthday", "Friday", "Saturday", "Sunday"];
-let day = days[date.getDay()];
-let timeHours = date.getHours();
-let timeMins = date.getMinutes();
+let weatherIcon = document.querySelector("#icon");
 let celsius = document.getElementById("celsius");
 let faringeit = document.getElementById("faringeit");
-if (timeMins < 10) {
-    timeMins = `0${timeMins}`;
+
+
+function formatTime(timestamp) {
+    let date = new Date(timestamp);
+    console.log(date);
+    let day = days[date.getDay()];
+    let timeHours = date.getHours();
+    if (timeHours < 10) {
+        timeHours = `0${timeHours}`;
+    }
+    let timeMins = date.getMinutes();
+    if (timeMins < 10) {
+        timeMins = `0${timeMins}`;
+    }
+    return ` ${day} ${timeHours}:${timeMins}`;
 }
 
-dateTime.innerHTML = ` ${day} ${timeHours}:${timeMins}`;
 
 //Feature1: Send form for user's choice city
 function showTemperature(response) {
     console.log(response);
     temperature.innerHTML = Math.round(response.data.main.temp);
     humidity.innerHTML = response.data.main.humidity;
+    dateTime.innerHTML = formatTime(response.data.dt * 1000);
+    weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    weatherIcon.setAttribute("alt", `http://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`);
 }
 
 formSearch.addEventListener("submit", (event) => {
