@@ -1,4 +1,5 @@
 let date = new Date();
+let defaultCity = "Kyiv";
 let temperature = document.getElementById("temperature");
 let humidity = document.getElementById("humidity");
 let buttonCurrent = document.querySelector("#current");
@@ -41,13 +42,14 @@ function showTemperature(response) {
     weatherIcon.setAttribute("alt", `http://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`);
 }
 
-formSearch.addEventListener("submit", (event) => {
+function search(event) {
     event.preventDefault();
     city.innerHTML = searchInput.value;
-
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=metric&appid=${api}`).then(showTemperature);
+}
 
-})
+formSearch.addEventListener("submit", search);
+
 //Feature2: Convert temperature Celsius/Farengeit
 celsius.addEventListener("click", (event) => {
     event.preventDefault();
@@ -64,25 +66,7 @@ faringeit.addEventListener("click", (event) => {
     celsius.classList.remove("active");
     faringeit.classList.add("active");
 });
-//Feature3: Show weather for Current city
-function showWeatherCurrentCity(response) {
-    console.log(response);
-    city.innerHTML = response.data.name;
-    temperature.innerHTML = Math.round(response.data.main.temp);
-    humidity.innerHTML = response.data.main.humidity;
-}
 
-function getCurrentPosition(response) {
-    console.log(response);
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${response.coords.latitude}&lon=${response.coords.longitude}&units=metric&appid=${api}`)
-        .then(showWeatherCurrentCity);
-}
-
-function getPosition() {
-    navigator.geolocation.getCurrentPosition(getCurrentPosition);
-
-}
-buttonCurrent.addEventListener("click", (event) => {
-    event.preventDefault();
-    getPosition();
+document.addEventListener('DOMContentLoaded', function () {
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&units=metric&appid=${api}`).then(showTemperature);
 });

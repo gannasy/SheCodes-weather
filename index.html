@@ -22,9 +22,9 @@
     <div class="container position-relative">
       <div class="card border-primary" style="width: 50rem">
         <div class="card-body">
-          <div class="row">
-            <form class="row search-from">
-              <div class="col-8">
+          <form class="search-from mb-3">
+            <div class="row">
+              <div class="col">
                 <input
                   type="text"
                   class="form-control"
@@ -32,33 +32,29 @@
                   placeholder="Enter a city"
                 />
               </div>
-              <div class="col">
-                <button type="submit" class="btn btn-primary" id="search">
-                  Search
-                </button>
+              <div class="col-2">
+                <input
+                  type="submit"
+                  class="btn btn-primary"
+                  id="search"
+                  value="Search"
+                />
               </div>
-              <div class="col">
-                <button class="btn btn-secondary" id="current">Current</button>
-              </div>
-            </form>
-          </div>
+            </div>
+          </form>
 
           <div class="row">
             <div class="col">
               <div class="card city-card" style="width: 18rem">
                 <div class="card-body">
                   <p class="card-text city">Kyiv</p>
+                  <p>Last updated:<span class="key" id="date-time"> </span></p>
                   <p>
-                    Last updated:<span class="key" id="date-time">
-                      2:43 PM</span
-                    >
-                  </p>
-                  <p>
-                    Temperature: <span class="key" id="temperature"> 19</span
+                    Temperature: <span class="key" id="temperature"> </span
                     ><a href="#" class="temp active" id="celsius"> ℃|</a
                     ><a href="#" class="temp" id="faringeit">℉</a>
                   </p>
-                  <p>Humidity: <span class="key" id="humidity"> 35%</span></p>
+                  <p>Humidity: <span class="key" id="humidity"> </span>%</p>
                   <img
                     src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
                     alt="weather"
