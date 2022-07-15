@@ -11,6 +11,7 @@ let days = ["Sunday", "Monday", "Tuesday", "Wensday", "Thurthday", "Friday", "Sa
 let weatherIcon = document.querySelector("#icon");
 let celsius = document.getElementById("celsius");
 let faringeit = document.getElementById("faringeit");
+let tempValue = null;
 
 
 function formatTime(timestamp) {
@@ -32,6 +33,7 @@ function formatTime(timestamp) {
 //Feature1: Send form for user's choice city
 function showTemperature(response) {
     console.log(response);
+    tempValue = response.data.main.temp;
     temperature.innerHTML = Math.round(response.data.main.temp);
     humidity.innerHTML = response.data.main.humidity;
     dateTime.innerHTML = formatTime(response.data.dt * 1000);
@@ -49,12 +51,18 @@ formSearch.addEventListener("submit", (event) => {
 //Feature2: Convert temperature Celsius/Farengeit
 celsius.addEventListener("click", (event) => {
     event.preventDefault();
-    temperature.innerHTML = 19;
+    temperature.innerHTML = Math.round(tempValue);
+    celsius.classList.add("active");
+    faringeit.classList.remove("active");
+
 })
 
 faringeit.addEventListener("click", (event) => {
     event.preventDefault();
-    temperature.innerHTML = 66;
+    let farengeitTemp = (tempValue * 9) / 5 + 32;
+    temperature.innerHTML = Math.round(farengeitTemp);
+    celsius.classList.remove("active");
+    faringeit.classList.add("active");
 });
 //Feature3: Show weather for Current city
 function showWeatherCurrentCity(response) {
