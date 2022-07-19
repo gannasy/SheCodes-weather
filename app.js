@@ -14,7 +14,8 @@ let celsius = document.getElementById("celsius");
 let faringeit = document.getElementById("faringeit");
 let tempValue = null;
 let forecast = document.querySelector("#weather-forecast");
-
+let todayLink = document.querySelector("#today");
+let tomorrowLink = document.querySelector("#tomorrow");
 
 function formatTime(timestamp) {
     let date = new Date(timestamp);
@@ -47,7 +48,9 @@ function showTemperature(response) {
 
 function search(event) {
     event.preventDefault();
+
     city.innerHTML = searchInput.value;
+
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&units=metric&appid=${api}`).then(showTemperature);
 }
 
@@ -57,8 +60,8 @@ formSearch.addEventListener("submit", search);
 celsius.addEventListener("click", (event) => {
     event.preventDefault();
     temperature.innerHTML = Math.round(tempValue);
-    celsius.classList.add("active");
-    faringeit.classList.remove("active");
+    celsius.classList.add("activable");
+    faringeit.classList.remove("activable");
 
 })
 
@@ -66,8 +69,8 @@ faringeit.addEventListener("click", (event) => {
     event.preventDefault();
     let farengeitTemp = (tempValue * 9) / 5 + 32;
     temperature.innerHTML = Math.round(farengeitTemp);
-    celsius.classList.remove("active");
-    faringeit.classList.add("active");
+    celsius.classList.remove("activable");
+    faringeit.classList.add("activable");
 });
 
 function getForecast(coords) {
@@ -115,6 +118,24 @@ function displayforecast(response) {
     forecastHTML = forecastHTML + "</div>"
     forecast.innerHTML = forecastHTML;
 }
+
+function displayTomorrowWeather(response) {
+    console.log(response);
+    tempValue = response.data.main.temp;
+    temperature.innerHTML = Math.round(response.data.main.temp);
+    humidity.innerHTML = response.data.main.humidity;
+    dateTime.innerHTML = formatTime(response.data.dt * 1000);
+    weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    weatherIcon.setAttribute("alt", `http://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`);
+}
+
+function getCurrentCityCoords(response) {
+    let coords = response.data.coord;
+    console.log(coords);
+    axios.get(`https://api.openweathermap.org/data/3.0/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${api}&units=metric`).then(showTomorrowData);
+
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${defaultCity}&units=metric&appid=${api}`).then(showTemperature);

@@ -2,10 +2,19 @@ p {
   color: blue;
   font-weight: bold;
 }
+.weather {
+  border: none;
+  padding: 0 0 0 70px;
+  background: linear-gradient(#e7eaf6, #a2a8d3);
+}
 
 .weather {
   color: blue;
   font-size: 24px;
+}
+
+.card-body {
+  background: linear-gradient(#e7eaf6, #a2a8d3);
 }
 
 .sun-icon {
@@ -18,12 +27,8 @@ p {
   border-right: 5px solid coral;
 }
 
-.weather {
-  border: none;
-}
-
 .position-relative {
-  top: 60px;
+  top: 80px;
 }
 
 .key {
@@ -49,12 +54,12 @@ p {
   padding: 5px 25px;
 }
 
-.active {
+.activable {
   color: black;
   cursor: default;
   text-decoration: none;
 }
 
-.active:hover {
+.activable:hover {
   text-decoration: underline;
 }
